@@ -1,0 +1,15 @@
+<h3>The artist invited is: <%=artistName%>; but The Beatles are okupas</h3>
+
+<%
+  artistFound.forEach(function (artistObj) { %>
+      <div class="thumb-box">
+          <% if(artistObj.images.length > 0) {%>
+          <img class="thumb-image" src=<%=artistObj.images[0].url%>></img>
+          <% } %>
+          <h2 class="thumb-heading"><%=artistObj.name%></h2>
+          <a class="thumb-button" href="/albums/<%=artistObj.id%>">
+            <p class="thumb-button-text">View Albums</p>
+          </a>
+      </div>
+  <% });
+%>
