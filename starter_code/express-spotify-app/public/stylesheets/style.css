@@ -4,6 +4,10 @@ body{
   font-family: sans-serif;
 }
 
+.page-heading{
+  text-align: center;
+}
+
 .thumb-box {
   background-color: grey;
   width: 300px;
@@ -43,4 +47,3 @@ body{
   font-family: sans-serif;
   font-size: 14px;
 }
- 

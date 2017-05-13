@@ -27,8 +27,9 @@ app.get('/', (req, res, next) => {
 
 app.post('/artists',(req,res,next)=>{
   let artistName=req.body.artist;
+  console.log(artistName);
   let artist;
-  spotify.searchArtists("The Beatles", {}, (err, data) => {
+  spotify.searchArtists(artistName, {}, (err, data) => {
     if (err) throw err;
 
     artist = data.body.artists.items;
@@ -39,6 +40,30 @@ app.post('/artists',(req,res,next)=>{
   });
 
 });
+
+app.get('/albums/:id',(req,res,next)=>{
+  let artistId=req.params.id;
+  //res.render('albumid',{album:album});
+  //let artistId = req.params.artistId;
+    let artistName = null;
+    spotify.getArtist(artistId)
+    .then(function(data) {
+      //console.log('Artist information', data.body);
+      artistName = data.body.name;
+      spotify.getArtistAlbums(artistId)
+        .then(function(data) {
+              //console.log('Artist albums', data.body);
+              let artistAlbums = data.body.items;
+              res.render('albumid', {artist: artistName, albums: artistAlbums});
+        }, function(err) {
+              console.error(err);
+      });
+    }, function(err) {
+      console.error(err);
+    });
+
+});
+
 
 spotify.searchArtists("The Beatles", {}, (err, data) => {
   if (err) throw err;
